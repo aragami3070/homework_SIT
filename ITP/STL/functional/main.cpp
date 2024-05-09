@@ -34,6 +34,26 @@ void task_1() {
 }
 
 void task_2(){
+	setlocale(LC_ALL, "RUS");
+	cout << "Введите кол-во чисел в массиве: ";
+	int len1;
+	cin >> len1;
+	vector<int> mas1(len1);
+	input_mas(len1, mas1);//вводим элементы массива
+
+	//удаляем все нечетные из первого массива
+	auto chek1 = [](int i) {return i % 2 != 0; };
+	auto new_end = remove_if(mas1.begin(), mas1.end(), chek1);
+	mas1.erase(new_end, mas1.end());//удаляем все после нового конца
+	len1 = mas1.size();
+	sort(mas1.begin(), mas1.end());//сортируем массив
+
+	cout << "Измененный первый массив: " << endl;
+	for (auto i = mas1.begin(); i < mas1.end(); i++) {
+		cout << *i << " ";
+	}
+	cout << endl << endl;
+	
 
 }
 
