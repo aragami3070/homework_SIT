@@ -8,6 +8,15 @@
 
 using namespace std;
 
+
+void input_mas(int len, vector<int>& mas) {
+	cout << "Введите числа массива: ";
+	for (int i = 0; i < len; i++) {
+		cin >> mas[i];
+	}
+	cout << endl;
+}
+
 void task_1(){
 
 }
