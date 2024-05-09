@@ -88,7 +88,23 @@ void task_2(){
 	}
 	cout << endl << endl;
 
-	
+	//создаем массив для числа, чтобы вставить его в конечный массив сортировкой слиянием
+	cout << "Введите число, которое нужно добавить в массив: " << endl;
+	vector<int> mas3(1);
+	cin >> mas3[0];
+	cout << endl;
+
+	//массив для результата
+	vector<int> mas_res(len1 + len2 + 1);
+	merge(mas_sort.begin(), mas_sort.end(), mas3.begin(), mas3.end(), mas_res.begin());
+
+	//вывод ответа
+	cout << "Ответ: " << endl;
+	for (auto i = mas_res.begin(); i < mas_res.end(); i++) {
+		cout << *i << " ";
+	}
+	cout << endl;
+
 }
 
 
