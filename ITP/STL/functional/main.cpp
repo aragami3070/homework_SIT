@@ -104,12 +104,43 @@ void task_2(){
 		cout << *i << " ";
 	}
 	cout << endl;
-
 }
 
 
 void task_3(){
-	
+	setlocale(LC_ALL, "RUS");
+	cout << "Введите кол-во точек в массиве: ";
+	int len;
+	cin >> len;
+	vector<vector<double>> mas_main(len, vector<double>(3));
+	vector<double> mas_p(3);
+	//ввод координат точек
+	cout << "Введите координаты точек: " << endl;
+	for (int i = 0; i < len; i++) {
+		for (int j = 0; j < 3; j++) {
+			cin >> mas_main[i][j];
+		}
+	}
+	//ввод координат исходной точки
+	cout << "Введите координаты исходной точки: ";
+	for (int i = 0; i < 3; i++) {
+		cin >> mas_p[i];
+	}
+	vector<double> mas_res;//массив для результатов
+	for (int i = 0; i < len; i++) {
+		//нахождение растояния между главной точкой и i-ой точкой массива
+		//lambda функция для нахождения для нахождения квадрата разности координат точек
+		auto func = [](int a, int b) {return (a - b) * (a - b); };
+		//сумма квадратов разности координат (x координат, y координат, z координат)
+		double length = inner_product(mas_main[i].begin(), mas_main[i].end(), mas_p.begin(), 0, plus<double>(), func);
+		//берем корень для получения расстояния между точками и добавляем в массив
+		mas_res.push_back(sqrt(length));
+	}
+	//вывод
+	cout << "Ответ: " << endl;
+	for (auto it = mas_res.begin(); it != mas_res.end(); ++it) {
+		cout << *it << endl;
+	}
 }
 
 
