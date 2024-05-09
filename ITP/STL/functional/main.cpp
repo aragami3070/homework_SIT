@@ -17,6 +17,7 @@ void input_mas(int len, vector<int>& mas) {
 	cout << endl;
 }
 
+
 void task_1() {
 	setlocale(LC_ALL, "RUS");
 	cout << "Введите кол-во чисел в массиве: ";
@@ -32,6 +33,7 @@ void task_1() {
 	//выводим кол-во минимальных элементов
 	cout << count(mas.begin(), mas.end(), *it) << endl;;
 }
+
 
 void task_2(){
 	setlocale(LC_ALL, "RUS");
@@ -53,13 +55,37 @@ void task_2(){
 		cout << *i << " ";
 	}
 	cout << endl << endl;
-	
+
+
+	cout << "Введите кол-во чисел в массиве: ";
+	int len2;
+	cin >> len2;
+	vector<int> mas2(len2);
+	input_mas(len2, mas2);//вводим элементы массива 
+	int x;
+	cout << "x = ";
+	cin >> x;
+	cout << endl;
+	auto it = max_element(mas2.begin(), mas2.end());//находим адресс минимального элемента
+
+	//меняем все кратные х на макс элемент во втором массиве
+	auto chek2 = [&x](int i) {return i % x == 0; };
+	replace_if(mas2.begin(), mas2.end(), chek2, *it);
+	sort(mas2.begin(), mas2.end());//сортируем массив
+
+	cout << "Измененный второй массив: " << endl;
+	for (auto i = mas2.begin(); i < mas2.end(); i++) {
+		cout << *i << " ";
+	}
+	cout << endl << endl;
 
 }
+
 
 void task_3(){
 	
 }
+
 
 int main(){
 	cout << "Выберете номер задания:" << endl;
