@@ -79,6 +79,16 @@ void task_2(){
 	}
 	cout << endl << endl;
 
+	vector<int> mas_sort(len1 + len2);
+	//слияние двух массивов в один сортировкой слиянием
+	merge(mas1.begin(), mas1.end(), mas2.begin(), mas2.end(), mas_sort.begin());
+	cout << "Слияние двух массивов в один отсортированный: " << endl;
+	for (auto i = mas_sort.begin(); i < mas_sort.end(); i++) {
+		cout << *i << " ";
+	}
+	cout << endl << endl;
+
+	
 }
 
 
