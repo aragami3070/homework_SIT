@@ -17,8 +17,20 @@ void input_mas(int len, vector<int>& mas) {
 	cout << endl;
 }
 
-void task_1(){
+void task_1() {
+	setlocale(LC_ALL, "RUS");
+	cout << "Введите кол-во чисел в массиве: ";
+	int len;
+	cin >> len;
+	vector<int> mas(len);
+	//вводим элементы массива
+	input_mas(len, mas);
+	//находим адресс минимального элемента
+	auto it = min_element(mas.begin(), mas.end());
 
+	cout << "Ответ: " << endl;
+	//выводим кол-во минимальных элементов
+	cout << count(mas.begin(), mas.end(), *it) << endl;;
 }
 
 void task_2(){
