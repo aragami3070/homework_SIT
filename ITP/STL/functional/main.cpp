@@ -137,10 +137,14 @@ void task_3(){
 		mas_res.push_back(sqrt(length));
 	}
 	//вывод
-	cout << "Ответ: " << endl;
+	cout << "Вывод расстояний:" << endl;
+	double sum = 0;
 	for (auto it = mas_res.begin(); it != mas_res.end(); ++it) {
 		cout << *it << endl;
+		sum += *it;
 	}
+	cout << "Ответ: " << endl;
+	cout << sum << endl;
 }
 
 
