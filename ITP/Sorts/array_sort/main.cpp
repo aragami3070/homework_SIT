@@ -232,6 +232,67 @@ void selection_sort(vector<int>& s_mas, int mas_size) {
 }
 
 
+void task_3() {
+	//создаем массив под матрицу
+	vector<vector<int>> mas;
+	//заполняем массив из файла input.txt
+	input_from_file(mas);
+	//размер квадратной матрицы
+	int mas_size = mas[0].size();
+	//создаем массив из диагоналей
+	vector <vector<int>> temp;
+	//добавляем все диагонали от главной и выше(включительно)
+	for (int i = 0; i < mas_size ; i++) {
+		temp.push_back(vector<int>());
+		for (int j = 0; j < mas_size; j++) {
+			if (j + i < mas_size) {
+				temp[i].push_back(mas[j][j + i]);
+				
+			}
+		}
+		
+	}
+	//добавляем все диагонали ниже главной 
+	for (int i = 1; i < mas_size; i++) {
+		temp.push_back(vector<int>());
+		for (int j = 0; j < mas_size; j++) {
+			if (j + i < mas_size) {
+				temp[i + mas_size - 1].push_back(mas[j+i][j]);
+
+			}
+		}
+
+	}
+	//проходимся по массиву с диагоналями и сортируем диагонали
+	for (auto temp_it = temp.begin(); temp_it != temp.end(); temp_it++) {
+		selection_sort(*temp_it, (*temp_it).size());
+	}
+	//возвращаем отсортированные диагонали в изначальный массив
+	//возвращаем все диагонали от главной и выше
+	for (int i = 0; i < mas_size; i++) {
+		for (int j = 0; j < mas_size; j++) {
+			if (j + i < mas_size) {
+				mas[j][j + i] = temp[i][j];
+
+			}
+		}
+
+	}
+	//возвращаем все диагонали ниже главной 
+	for (int i = 1; i < mas_size; i++) {
+		for (int j = 0; j < mas_size; j++) {
+			if (j + i < mas_size) {
+				mas[j + i][j] = temp[i + mas_size - 1][j];
+
+			}
+		}
+
+	}
+	//выводим матрицу в файл output_3.txt
+	output_in_file(mas, mas_size, "3");
+}
+
+
 int main(){
-	task_2();
+	task_3();
 }
