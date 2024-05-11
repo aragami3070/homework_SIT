@@ -101,3 +101,25 @@ void heap_sort(vector<vector<int>>& mas, int mas_size) {
 		}
 	 }
 }
+
+
+void task_1() {
+	//создаем массив под матрицу
+	vector<vector<int>> mas;
+	//заполняем массив из файла input.txt
+	input_from_file(mas);
+	//размер квадратной матрицы
+	int mas_size = mas[0].size();
+	
+	reverse_mas(mas, mas_size);
+	//сортируем столбцы по возрастанию пирамидальной сортировкой  
+	heap_sort(mas, mas_size);
+	reverse_mas(mas, mas_size);
+	//выводим отсортированную матрицу в файл output_1.txt
+	output_in_file(mas, mas_size, "1");
+}
+
+
+int main(){
+	task_1();
+}
