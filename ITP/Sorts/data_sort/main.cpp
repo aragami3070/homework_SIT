@@ -149,7 +149,18 @@ void gnome_sort(vector<people_info>& vec_info, int vec_size) {
 }
 
 
+void task_2() {
+	//создание массива под данные о людях 
+	vector<people_info> vec_info;
+	//ввод данных в массив
+	vec_info = create_vec_info();
+	//гномья сортировка сначала по должности, потом по зарплате
+	gnome_sort(vec_info, vec_info.size());
+	//вывод данных в новый файл output2.txt
+	output_f(vec_info, 2);
+}
+
 
 int main(){
-	task_1();
+	task_2();
 }
