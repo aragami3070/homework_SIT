@@ -8,7 +8,6 @@
 using namespace std;
 
 
-
 void input_from_file(vector<vector<int>>& mas) {
 	//создаем поток на чтение из файла 
 	ifstream input;
@@ -43,4 +42,17 @@ void output_in_file(vector<vector<int>>& mas,int mas_size, string task_number) {
 	}
 	//закрываем поток 
 	output.close();
+}
+
+
+void reverse_mas(vector<vector<int>>& mas, int mas_size) {
+	//функция располагающая столбцы матрицы как строки
+	vector<vector<int>> mas1;
+	for (int j = 0; j < mas_size; j++) {
+		mas1.push_back(vector<int>());
+		for (int i = 0; i < mas_size; i++) {
+			mas1[j].push_back(mas[i][j]);
+		}
+	}
+	mas = mas1;
 }
