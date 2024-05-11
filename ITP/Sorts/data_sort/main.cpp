@@ -20,12 +20,14 @@ date_of_birth str_to_date(string str) {
 	return date;
 }
 
+
 struct people_info {//структура для всех данных считываемых из файла
 	string surname, post;//фамилия, должность
 	date_of_birth date;//дата рождения
 	double work_experience;//опыт работы
 	int salary;//зарплата
 };
+
 
 vector<people_info> create_vec_info() {//создание массива с входными данными
 	vector<people_info> vec_info;
@@ -48,6 +50,7 @@ vector<people_info> create_vec_info() {//создание массива с вх
 	input.close();//закрываем файл
 	return vec_info;//возвращаем массив с данными о людях
 }
+
 
 void output_f(vector<people_info> vec_info,int number_task) {//вывод в файл
 	people_info temp;
@@ -126,7 +129,6 @@ void task_1() {
 }
 
 
-
 void gnome_sort(vector<people_info>& vec_info, int vec_size) {
 	int i = 1;
 	while (i < vec_size) {//пока не дошли до последнего
@@ -160,6 +162,7 @@ void task_2() {
 	output_f(vec_info, 2);
 }
 
+
 void insert_sort(vector<people_info>& vec_info, int vec_size) {
 	for (int i = 1; i < vec_size; i++) {//проходимся по массиву данными 
 		int j = i;
@@ -176,6 +179,19 @@ void insert_sort(vector<people_info>& vec_info, int vec_size) {
 			j--;//шаг назад
 		}
 	}
+}
+
+
+void task_3() {
+	//создание массива под данные о людях 
+	vector<people_info> vec_info;
+	//ввод данных в массив
+	vec_info = create_vec_info();
+	//сортировка вставками сначала по фамилии, потом по стажу работы, потом по году рождения
+	insert_sort(vec_info, vec_info.size());
+	//вывод данных в новый файл output2.txt
+	output_f(vec_info, 3);
+
 }
 
 
