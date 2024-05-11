@@ -114,3 +114,18 @@ void quicksort(vector<people_info> &vec_info, int left_i, int right_i) {
 }
 
 
+void task_1() {
+	//создание массива под данные о людях 
+	vector<people_info> vec_info;
+	//ввод данных в массив
+	vec_info = create_vec_info();
+	//быстрая сортировка по зарплате 
+	quicksort(vec_info, 0, vec_info.size() - 1);
+	//вывод данных в новый файл output1.txt
+	output_f(vec_info, 1);
+}
+
+
+int main(){
+	task_1();
+}
