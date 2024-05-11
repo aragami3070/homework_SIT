@@ -120,6 +120,79 @@ void task_1() {
 }
 
 
+
+void merge(vector<int> &s_mas, int left_i, int right_i, int middle) {
+	
+	if (left_i >= right_i || middle < left_i || middle > right_i) {
+		return;
+	}
+	//если массив состоит из двух элементов и они не отсортированы, 
+	//то меняем местами и прекращаем работу алгоритма 
+	if (right_i - left_i == 1 && (s_mas[left_i] > s_mas[right_i])) {
+		swap(s_mas[left_i], s_mas[right_i]);
+		return;
+	}
+	//создаем индексы для левого и правого массивов  
+	int l_begin = left_i, r_begin = middle + 1;
+	
+	int flag = 0;
+	
+	vector<int> temp;
+	while (right_i - left_i + 1 > flag) {
+		//если все элементы из левого массива добавленны 
+		//то добавляем оставшиеся из правого
+		if (l_begin > middle) {
+			for (int i = r_begin; i <= right_i; i++) {
+				temp.push_back(s_mas[i]);
+				flag++;
+			}
+		}
+		//иначе если все элементы из правого массива добавленны
+		//то добавляем оставшиеся из левого
+		else if (r_begin > right_i) {
+			for (int i = l_begin; i <= middle; i++) {
+				temp.push_back(s_mas[i]);
+				flag++;
+			}
+		}
+		//иначе если элемент из левого массива больше элемента из правого массива,
+		//то добавляем элемент из правого
+		else if (s_mas[l_begin] > s_mas[r_begin]) {
+			temp.push_back(s_mas[r_begin]);
+			r_begin++;
+			flag++;
+		}
+		//иначе добавляем элемент из левого
+		else {
+			temp.push_back(s_mas[l_begin]);
+			l_begin++;
+			flag++;
+		}
+		
+	}
+	//записываем отсортированный temp в основной массив начиная с индекса left_i
+	flag = left_i;
+	for (auto i = temp.begin(); i != temp.end(); i++) {
+		s_mas[flag] = *i;
+		flag++;
+	}
+}
+
+void merge_sort(vector<int>& s_mas, int left_i, int right_i) {
+	if (left_i >= right_i) {
+		return;
+	}
+	//создаем индекс на центральный элемент
+	int middle = left_i + ((right_i - left_i) / 2);
+	//запускаем сортировку от левого края до центра
+	merge_sort(s_mas, left_i, middle);
+	//запускаем сортировку от центра до правого края 
+	merge_sort(s_mas, middle + 1, right_i);
+	//слияние получившихся массивов
+	merge(s_mas, left_i, right_i, middle);
+}
+
+
 int main(){
 	task_1();
 }
