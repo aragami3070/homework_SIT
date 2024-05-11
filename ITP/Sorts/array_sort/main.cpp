@@ -28,3 +28,19 @@ void input_from_file(vector<vector<int>>& mas) {
 	//закрываем поток
 	input.close();
 }
+
+
+void output_in_file(vector<vector<int>>& mas,int mas_size, string task_number) {
+	//создаем поток на вывод матрицы в файл 
+	ofstream output;
+	output.open("output_" + task_number + ".txt");
+	//выводим матрицу в файл
+	for (int i = 0; i < mas_size; i++) {
+		for (int j = 0; j < mas_size; j++) {
+			output << mas[i][j] << " ";
+		}
+		output << endl;
+	}
+	//закрываем поток 
+	output.close();
+}
