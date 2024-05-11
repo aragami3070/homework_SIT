@@ -84,3 +84,20 @@ void heap_sifting(vector<int>& s_mas, int index, int mas_size) {
 	}
 }
 
+
+void heap_sort(vector<vector<int>>& mas, int mas_size) {
+	for (int i = 0; i < mas_size; i++) {
+		//строим пирамиду через функцию просеивания - 
+		//heap_sifting(массив, индекс родителя, размер массива)
+		for (int j = (mas_size / 2) + 1; j >= 0; j--) {
+			heap_sifting(mas[i], j, mas_size);
+		}
+		//так как в голове пирамиды находится максимальный элемент, меняем его с 
+		//j - тым элементом массива(последним элементом из не отсортированной части массива)
+		for (int j = mas_size - 1; j > 0; j--) {
+			swap(mas[i][0], mas[i][j]);
+			//перестраиваем пирамиду сначала не включая отсортированные элементы
+			heap_sifting(mas[i], 0, j);
+		}
+	 }
+}
