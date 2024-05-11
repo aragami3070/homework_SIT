@@ -160,6 +160,24 @@ void task_2() {
 	output_f(vec_info, 2);
 }
 
+void insert_sort(vector<people_info>& vec_info, int vec_size) {
+	for (int i = 1; i < vec_size; i++) {//проходимся по массиву данными 
+		int j = i;
+		//пока j не вернулось в начало и проходит одно из условий показывающее, что 
+		//эти два элемента не отсортированны
+		//меняем их местами и идем к следующей паре элементов
+		while (j > 0 && (vec_info[j].surname < vec_info[j - 1].surname ||
+			(vec_info[j].surname == vec_info[j - 1].surname &&
+				vec_info[j].work_experience < vec_info[j - 1].work_experience) ||
+			(vec_info[j].surname == vec_info[j - 1].surname &&
+				vec_info[j].work_experience == vec_info[j - 1].work_experience &&
+				vec_info[j].date.year < vec_info[j - 1].date.year))) {
+			swap(vec_info[j], vec_info[j - 1]);//замена
+			j--;//шаг назад
+		}
+	}
+}
+
 
 int main(){
 	task_2();
