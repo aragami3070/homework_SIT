@@ -292,7 +292,23 @@ void task_3() {
 	output_in_file(mas, mas_size, "3");
 }
 
-
-int main(){
-	task_3();
+int main() {
+	setlocale(LC_ALL, "RUS");
+	cout << "Выбор задания:" << endl;
+	cout << "Задание 1 пирамидальная сортировка : 1" << endl;
+	cout << "Задание 2 сортировка слиянием : 2" << endl;
+	cout << "Задание 3 сортировка выбором : 3" << endl;
+	int choose_n;//выбор задания по номеру(1,2,3) через switch
+	cin >> choose_n;
+	switch (choose_n) {
+	case 1:
+		task_1();
+		break;
+	case 2:
+		task_2();
+		break;
+	case 3:
+		task_3();
+		break;
+	}
 }
