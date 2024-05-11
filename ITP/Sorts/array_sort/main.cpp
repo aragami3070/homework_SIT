@@ -193,6 +193,29 @@ void merge_sort(vector<int>& s_mas, int left_i, int right_i) {
 }
 
 
+void task_2() {
+	//создаем вектор под матрицу 
+	vector<vector<int>> mas;
+	//заполняем массив из файла input.txt
+	input_from_file(mas);
+	//размер квадратной матрицы
+	int mas_size = mas[0].size();
+	//сортируем через сортировку слиянием 
+	//каждую третью строку матрицы по убыванию, остальные по возрастанию
+	for (int i = 0; i < mas_size; i++) {
+		//сортируем по возрастанию
+		merge_sort(mas[i], 0, mas_size - 1);
+		if ((i + 1) % 3 == 0) {
+			//переворот отсортированной строки
+			reverse(mas[i].begin(), mas[i].end());
+		}
+	}
+	
+	//выводим отсортированную матрицу в файл output_2.txt
+	output_in_file(mas, mas_size, "2");
+}
+
+
 int main(){
-	task_1();
+	task_2();
 }
