@@ -216,6 +216,22 @@ void task_2() {
 }
 
 
+void selection_sort(vector<int>& s_mas, int mas_size) {
+	//проходимся по массиву
+	for (int index = 0; index < mas_size; index++) {
+		//находим минимум от index до конца массива
+		int min_index = index;
+		for (int i = index + 1; i < mas_size; i++) {
+			if (s_mas[i] < s_mas[min_index]) {
+				min_index = i;
+			}
+		}
+		//меняем местами элемент в index с минимальным
+		swap(s_mas[index], s_mas[min_index]);
+	}
+}
+
+
 int main(){
 	task_2();
 }
