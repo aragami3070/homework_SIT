@@ -26,3 +26,25 @@ struct people_info {//структура для всех данных считы
 	double work_experience;//опыт работы
 	int salary;//зарплата
 };
+
+vector<people_info> create_vec_info() {//создание массива с входными данными
+	vector<people_info> vec_info;
+	//переменная структура для хранения данных на одного пользователя,
+	//чтобы засунуть их в массив со всеми пользователями
+	people_info temp;
+	ifstream input;//создаем поток
+	input.open("input.txt");//открываем файл на чтение
+	//ввод данных
+	while (input.peek() != EOF) {
+		input >> temp.surname;//ввод фамилии
+		input >> temp.post;//ввод должности
+		string str;
+		input >> str;//вводится дата рождения строкой
+		temp.date = str_to_date(str);//преобразование строки с датой в структуру даты
+		input >> temp.work_experience;//ввод стажа
+		input >> temp.salary;//ввод зарплаты
+		vec_info.push_back(temp);//добавляем данные человека в массив
+	}
+	input.close();//закрываем файл
+	return vec_info;//возвращаем массив с данными о людях
+}
