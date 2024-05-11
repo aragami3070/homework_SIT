@@ -126,6 +126,30 @@ void task_1() {
 }
 
 
+
+void gnome_sort(vector<people_info>& vec_info, int vec_size) {
+	int i = 1;
+	while (i < vec_size) {//пока не дошли до последнего
+		if (i == 0) {//если дошли до первого элемента то i++
+			i++;
+		}
+		//если предыдущий элемент меньше по должности или 
+		//(равен по должности и меньше или равен по зарплате) то не меняя идем к следущей паре
+		//тк эти два элемента отсортированы
+		if (vec_info[i - 1].post < vec_info[i].post || 
+			(vec_info[i - 1].post == vec_info[i].post &&
+			vec_info[i - 1].salary <= vec_info[i].salary)) {
+			i++;
+		}
+		else {//иначе меняем местами и идем к предыдущей паре
+			swap(vec_info[i - 1], vec_info[i]);
+			i--;
+		}
+	}
+}
+
+
+
 int main(){
 	task_1();
 }
