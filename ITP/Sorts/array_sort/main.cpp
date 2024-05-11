@@ -56,3 +56,31 @@ void reverse_mas(vector<vector<int>>& mas, int mas_size) {
 	}
 	mas = mas1;
 }
+
+
+void heap_sifting(vector<int>& s_mas, int index, int mas_size) {
+	while (true) {
+		int mmax = index;
+		int left_i = 2 * index + 1;//индекс левого ребенка
+		int right_i = 2 * index + 2;//индекс правого ребенка
+		//если левый ребенок больше родителя, то mmax приравниваем к индексу ребенка 
+		if (left_i < mas_size && s_mas[mmax] < s_mas[left_i]) {
+			mmax = left_i;
+		}
+		//если правый ребенок больше родителя, то mmax приравниваем к индексу ребенка
+		if (right_i < mas_size && s_mas[mmax] < s_mas[right_i]) {
+			mmax = right_i;
+		}
+		//если mmax == индексу родителя, то завершаем цикл
+		//иначе меняем родителя местами с ребенком 
+		//и ребенок становится родителем 
+		if (mmax == index) {
+			break;
+		}
+		else {
+			swap(s_mas[mmax], s_mas[index]);
+			index = mmax;
+		}
+	}
+}
+
