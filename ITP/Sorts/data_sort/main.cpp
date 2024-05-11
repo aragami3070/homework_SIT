@@ -48,3 +48,36 @@ vector<people_info> create_vec_info() {//создание массива с вх
 	input.close();//закрываем файл
 	return vec_info;//возвращаем массив с данными о людях
 }
+
+void output_f(vector<people_info> vec_info,int number_task) {//вывод в файл
+	people_info temp;
+	ofstream output;
+	output.open("output"+to_string(number_task)+".txt");
+	for (int i = 0; i < vec_info.size(); i++) {
+		//по левому краю 13 позиций на фамилию 
+		//(чтобы у всех фамилий было одинаковое кол-во занимаемого места)
+		output << setw(13) << left << vec_info[i].surname;
+		//выводим должность
+		output << setw(15) << left << vec_info[i].post;
+		//выводим дату рождения
+		//если дней меньше 10 то добавляем 0 перед цифрой 
+		//и так же для месяца
+		if (vec_info[i].date.day < 10) {
+			output << left << '0' << vec_info[i].date.day << '.';
+		}
+		else {
+			output << left << vec_info[i].date.day << '.';
+		}
+		if (vec_info[i].date.month < 10) {
+			output << left << '0' << vec_info[i].date.month << '.';
+		}
+		else {
+			output << left << vec_info[i].date.month << '.';
+		}
+		output << left << vec_info[i].date.year << ' ';
+		//выводим стаж
+		output << setw(2) << left << vec_info[i].work_experience << ' ';
+		//выводим зарплату
+		output << left << vec_info[i].salary << endl;
+	}
+}
