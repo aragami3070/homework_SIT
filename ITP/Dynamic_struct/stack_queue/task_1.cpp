@@ -36,3 +36,16 @@ string pop(stack*& head) {
 	delete delete_cell;//удаляем первый элемент
 	return value;//возвращаем значение удаленного элемента
 }
+
+
+
+void reverse(stack*& head) {
+	stack* buffer = NULL;//буферный стек
+	//пока стек не пуст (проходимся по стеку)
+	while (head) {
+		//перезаписываем из одного стека в другой
+		push_back(buffer, pop(head));
+	}
+	head = buffer;//переобозначаем указатели
+}
+
