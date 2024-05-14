@@ -49,3 +49,63 @@ void reverse(stack*& head) {
 	head = buffer;//переобозначаем указатели
 }
 
+
+void change_1(stack*& head) {
+	stack* vowel = NULL;//буферный стек для гласных 
+	stack* consonant = NULL;//буферный стек для согласных
+
+	while (head) {
+		//если гласная, то добавляем в vowel
+		if (tolower((head->inf)[0]) == 'e' || tolower((head->inf)[0]) == 'y' ||
+			tolower((head->inf)[0]) == 'u' || tolower((head->inf)[0]) == 'i' ||
+			tolower((head->inf)[0]) == 'o' || tolower((head->inf)[0]) == 'a') {
+			push_back(vowel, pop(head));//удаляем с головы head и добавляем в vowel
+		}
+		//иначе добавляем в consonat 
+		else {
+			push_back(consonant, pop(head));//удаляем с головы head и добавляем в consonant
+		}
+	}
+	head = consonant;//переобозначили указатели
+	reverse(vowel);//перевернули стек с гласными
+	while (vowel) {//добавили 
+		push_back(head, pop(vowel));
+	}
+}
+
+
+void task_1() {
+	setlocale(LC_ALL, "RUS");
+	stack* numbers = NULL;
+	int len;
+	cout << "Введите кол-во элементов: " << endl;
+	cin >> len;
+	string x;
+	cout << "Введите элементы: " << endl;
+	for (int i = 0; i < len; i++) {
+		cin >> x;//ввели x
+		push_back(numbers, x);//добавили x в конец
+	}
+	//поставили гласные в начало, согласные в конец 
+	//так чтобы порядок следования совпадал с первоначальным
+	change_1(numbers);
+	//вывод ответа
+	cout << "Ответ:" << endl;
+	for (int i = 0; i < len; i++) {
+		cout << pop(numbers) << " ";
+	}
+}
+
+
+/*
+test:
+12
+q w e r t u i o p s d a
+
+ e u i o a q w r t p s d.
+*/
+
+
+int main() {
+	task_1();
+}
