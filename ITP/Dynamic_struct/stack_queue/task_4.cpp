@@ -55,3 +55,61 @@ int all_divisors(int number) {
 
 	return counter;
 }
+
+
+void change_4(stack*& head, int mmax, int& len) {
+	stack* buffer_ = NULL;//создаем буферный стек
+	len = 0;
+	while (head) {
+		//удаляем элемент и записываем его значение 
+		int x = pop(head);
+		//если кол-во делителей x меньше максимального кол-ва, то
+		//добавляем элемент в буферный стек
+		if (all_divisors(x) < mmax) {
+			push_back(buffer_, x);
+			len++;
+		}
+	}
+	//переобозначение указателей
+	head = buffer_;
+}
+
+
+void task_4() {
+	setlocale(LC_ALL, "RUS");
+	stack* numbers = NULL;
+	int len;
+	cout << "Введите кол-во элементов: " << endl;
+	cin >> len;
+	int x, mmax = 0;
+	cout << "Введите элементы: " << endl;
+	for (int i = 0; i < len; i++) {
+		cin >> x;//ввели x
+		//находим кол-во делителей x
+		int divisors = all_divisors(x);
+		//находим максимальное кол-во делителей элемнтов стека
+		if (divisors > mmax) {
+			mmax = divisors;
+		}
+		push_back(numbers, x);//добавили x в конец
+	}
+
+	change_4(numbers, mmax, len);
+	//вывод ответа
+	cout << "Ответ:" << endl;
+	for (int i = 0; i < len; i++) {
+		cout << pop(numbers) << " ";
+	}
+}
+
+
+/*
+9
+
+1 2 3 4 5 6 7 8 9
+*/
+
+
+int main() {
+	task_4();
+}
