@@ -38,3 +38,20 @@ int pop(stack*& head) {
 	delete delete_cell;//удаляем первый элемент
 	return value;//возвращаем значение удаленного элемента
 }
+
+//функция для нахождение кол-ва делителей числа 
+int all_divisors(int number) {
+	int sqrt_ = int(sqrt(number)) + 1;
+	int counter = 0;
+
+	for (int i = 1; i < sqrt_; i++) {
+		if (number % i == 0) {
+			counter++;
+			if (i * i != number) {
+				counter++;
+			}
+		}
+	}
+
+	return counter;
+}
