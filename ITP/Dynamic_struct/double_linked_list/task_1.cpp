@@ -36,3 +36,28 @@ void print(list*& head, list*& tail) {
 	}
 	cout << endl;
 }
+
+
+void insert_after(list*& head, list*& tail, list* after_this, int value) {
+	list* temp = new list;//новый элемент
+	temp->inf = value;//присваиваем значение
+	//если вставляем после хвоста
+	if (after_this == tail) {
+		temp->next = NULL;//вставляемый элемент будет последним
+		tail->next = temp;//делаем связи между хвостом и последним элементом
+		temp->prev = tail;
+		tail = temp;//ставим указатель на хвост на последний элемент
+	}
+	else {
+		//для temp следующий элемент это следующий за after_this
+		temp->next = after_this->next;
+		
+		//для temp предыдущий after_this
+		temp->prev = after_this;
+		//для следуещего за after_this элемента предыдущий temp
+		after_this->next->prev = temp;
+		//для after_this следующий 
+		
+		after_this->next = temp;
+	}
+}
