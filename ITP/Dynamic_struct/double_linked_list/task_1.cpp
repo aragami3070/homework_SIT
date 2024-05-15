@@ -61,3 +61,20 @@ void insert_after(list*& head, list*& tail, list* after_this, int value) {
 		after_this->next = temp;
 	}
 }
+
+
+void del_list(list*& head, list*& tail) {
+	//пока не дошли до конца
+	while (head) {
+		list* temp = head;//создали доп указатель на голову
+		if (head != tail) {
+			head = head->next;//двигаем голову на следующий элемент
+			head->prev = NULL;//обнуляем указатель на предыдущий элемент
+			delete temp;//удаляем элемент
+		}
+		else {
+			head = tail = NULL;
+			break;
+		}
+	}
+}
