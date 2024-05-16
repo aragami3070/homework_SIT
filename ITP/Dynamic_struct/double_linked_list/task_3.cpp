@@ -89,3 +89,20 @@ void del_elem(list*& head, list*& tail, list* del_this) {
 	}
 	delete del_this;
 }
+
+
+void del_list(list*& head, list*& tail) {
+	//пока не дошли до конца
+	while (head) {
+		list* temp = head;//создали доп указатель на голову
+		if (head != tail) {
+			head = head->next;//двигаем голову на следующий элемент
+			head->prev = NULL;//обнуляем указатель на предыдущий элемент
+			delete temp;//удаляем элемент
+		}
+		else {
+			head = tail = NULL;
+			break;
+		}
+	}
+}
