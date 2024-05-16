@@ -84,3 +84,83 @@ void del_list(list*& head, list*& tail) {
 		}
 	}
 }
+
+
+
+/*
+Создать двусвязный список, содержащий целые числа.
+Перенести в начало списка числа, меньшие Х.
+Например, было 8 2 1 6 3 5 4 2 1 8 9 7 и Х = 5
+стало 2 1 3 4 2 1 8 6 5 8 9 7
+*/
+
+void change_2(list*& head, list*& tail, int x) {
+	list* temp = head;//создаем два доп указателя
+	list* l_end = tail;
+	//пока не дошли до конца 
+	while (temp) {
+		//если элемент на который указывает temp >= x 
+		if (temp->inf >= x) {
+			//добавляем в конец temp и удаляем  элемент на который указывает temp
+			push_back(head, tail, temp->inf);//добавляем в конец
+			list* temp1 = temp;//доп указатель на temp
+			temp = temp->next;//передвигаем основной temp
+			//если это последний элемент изначального массива, то удалить элемент и прервать цикл
+			if (temp1 == l_end) {
+				del_elem(head, tail, temp1);
+				break;
+			}
+			//иначе только удалить 
+			else {
+				del_elem(head, tail, temp1);
+			}
+		}
+		else {
+			//если это последний элемент изначального массива, то прервать цикл
+			if (temp == l_end) {
+				break;
+			}
+			temp = temp->next;//передвигаем указатель
+		}
+	}
+}
+
+
+void task_2() {
+	setlocale(LC_ALL, "RUS");
+	list* mas_head = NULL;//создали два указателя для списка
+	list* mas_tail = NULL;
+	int len;
+	cout << "Введите кол-во элементов списка:" << endl;
+	cin >> len;
+	cout << "Введите элементы списка:" << endl;
+	//заполняем массив
+	for (int i = 0; i < len; i++) {
+		int temp;
+		cin >> temp;//ввод элемента
+		push_back(mas_head, mas_tail, temp);//добавляем элемент в массив
+	}
+	int x;
+	cout << "Введите x:" << endl;
+	cin >> x;
+	//все что меньше x оставляем слева, остальное переносим вправо
+	change_2(mas_head, mas_tail, x);
+	//вывод 
+	cout << "Ответ:" << endl;
+	print(mas_head, mas_tail);
+	//удаление всего массива
+	del_list(mas_head, mas_tail);
+}
+
+/*
+test
+12
+
+8 2 1 6 3 5 4 2 1 8 9 7
+
+5
+*/
+
+int main(){
+    task_2();
+}
