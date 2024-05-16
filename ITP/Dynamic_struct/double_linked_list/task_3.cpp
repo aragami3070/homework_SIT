@@ -106,3 +106,67 @@ void del_list(list*& head, list*& tail) {
 		}
 	}
 }
+
+
+list* separation_by_last_element(list*& head, list*& tail, list* left_i, list* right_i) {
+	int elem = right_i->inf;
+	list* elem_it = left_i;//доп указатель на левую границу
+	for (list* i = elem_it; i != right_i; i = i->next) {
+		if (i->inf <= elem) {
+			if(i!=elem_it){
+				//меняем элементы местами через вставку в нужное место элемнта
+				//и его удаление
+				//вствили
+				insert_after(head, tail, elem_it, i -> inf);
+				insert_after(head, tail, i, elem_it -> inf);
+				//предвинули указатель
+				elem_it = elem_it -> next;
+				i = i -> next;
+				//доп указатель на элемнты которые надо удалить
+				list* temp_el = elem_it -> prev;
+				list* temp_i = i -> prev;
+				//удалили
+				del_elem(head, tail, temp_el);
+				del_elem(head, tail, temp_i);
+			}
+			//сдвинули указатель
+			elem_it = elem_it->next;
+			
+		}
+	}
+	
+	if(elem_it!=right_i){
+		//меняем элементы местами через вставку в нужное место элемнта
+		//и его удаление
+		//вствили
+		insert_after(head, tail, elem_it, right_i -> inf);
+		insert_after(head, tail, right_i, elem_it -> inf);
+		//предвинули указатель
+		elem_it = elem_it -> next;
+		bool flag = false;
+		if(right_i != tail){
+			right_i = right_i -> next;
+			flag = true;
+		}
+		
+		//доп указатель на элемнты которые надо удалить
+		list* temp_el = elem_it -> prev;
+		list* temp_ri = right_i -> prev;
+		//удалили
+		del_elem(head, tail, temp_el);
+		del_elem(head, tail, temp_ri);
+		if (flag == true){
+			right_i = right_i ->prev;
+		}
+	}
+	return elem_it;
+}
+
+
+void quicksort(list*& head, list*& tail, list*& left_i, list*& right_i) {
+	if (right_i != NULL && left_i != right_i && left_i != right_i->next){
+		list * main_elem_it = separation_by_last_element(head, tail, left_i, right_i);
+		quicksort(head, tail, left_i, main_elem_it->prev);
+		quicksort(head, tail, main_elem_it->next, right_i);
+	}
+}
