@@ -170,3 +170,42 @@ void quicksort(list*& head, list*& tail, list*& left_i, list*& right_i) {
 		quicksort(head, tail, main_elem_it->next, right_i);
 	}
 }
+
+
+void task_3() {
+	setlocale(LC_ALL, "RUS");
+	list* mas_head = NULL;//создали два указателя для списка
+	list* mas_tail = NULL;
+	int len;
+	cout << "Введите кол-во элементов списка:" << endl;
+	cin >> len;
+	cout << "Введите элементы списка:" << endl;
+	//заполняем массив
+	for (int i = 0; i < len; i++) {
+		int temp;
+		cin >> temp;//ввод элемента
+		push_back(mas_head, mas_tail, temp);//добавляем элемент в массив
+	}
+	//используем быструю сортировку
+	quicksort(mas_head, mas_tail, mas_head, mas_tail);
+	//вывод 
+	cout << "Ответ:" << endl;
+	print(mas_head, mas_tail);
+	//удаление всего массива
+	del_list(mas_head, mas_tail);
+}
+/*
+test
+12
+
+8 2 1 6 3 5 4 2 1 8 9 7
+
+//
+6 
+8 2 3 7 1 1
+*/
+
+
+int main() {
+	task_3();
+}
