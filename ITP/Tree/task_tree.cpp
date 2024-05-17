@@ -3,6 +3,7 @@
 
 using namespace std;
 
+
 struct tree {
 	int inf;//значение узла
 	tree* left;//левый ребенок
@@ -148,7 +149,6 @@ tree* Prev(tree* tr, int value) {//поиск предыдущего
 }
 
 
-
 //симетричный обход
 void inorder(tree* tr) {
 	if (tr) {
@@ -168,11 +168,25 @@ void preorder(tree* tr) {
 	}
 }
 
+
 //обратный обход
 void postorder(tree* tr) {
 	if (tr) {
 		preorder(tr->left);
 		preorder(tr->right);
 		cout << tr->inf << " ";
+	}
+}
+
+
+//заполнение дерева бинарного поиска
+void input_bin_tree(tree*& tr) {
+	cout << "Введите кол-во элементов дерева: ";
+	int len, value;
+	cin >> len;
+	cout << "Введите элементы дерева:" << endl;
+	for (int i = 0; i < len; i++) {
+		cin >> value;
+		insert(tr, value);//добавляем элемент в дерево
 	}
 }
