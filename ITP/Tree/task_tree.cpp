@@ -104,3 +104,45 @@ tree* Max(tree* tr) {//поиск максимального
 		return Max(tr->right);
 	}
 }
+
+
+tree* Next(tree* tr, int value) {//поиск следующего
+	//создаем указатель на элемент value
+	tree* elem = find(tr, value);
+	if (elem == Max(tr)) {
+		return NULL;
+	}
+	//если есть правый ребенок 
+	if (elem->right) {
+		return Min(elem->right);//min по правой ветке
+	}
+	tree* par_elem = elem->parent;//указатель на родителя
+	//пока не дошли до корня или узел - правый ребенок
+	while (par_elem && elem == par_elem->right) {
+		//идем вверх по дереву
+		elem = par_elem;
+		par_elem = par_elem->parent;
+	}
+	return par_elem;
+}
+
+
+tree* Prev(tree* tr, int value) {//поиск предыдущего
+	//создаем указатель на элемент value
+	tree* elem = find(tr, value);
+	if (elem == Min(tr)) {
+		return NULL;
+	}
+	//если есть левый ребенок 
+	if (elem->left) {
+		return Max(elem->left);//max по левой ветке
+	}
+	tree* par_elem = elem->parent;//указатель на родителя 
+	//пока не дошли до корня или узел - левый ребенок 
+	while (par_elem && elem == par_elem->left) {
+		//идем вверх по дереву
+		elem = par_elem;
+		par_elem = par_elem->parent;
+	}
+	return par_elem;
+}
