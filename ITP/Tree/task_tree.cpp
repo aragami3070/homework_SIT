@@ -362,6 +362,50 @@ void task_3() {
 4 5 3 7 6 8 6 7 9 1 2 3 0 6 2
 */
 
-int main(){
-	task_3();
+
+
+/*
+task_4
+Вывести узлы k-ого уровня.
+*/
+
+void preorder_task_4(tree* tr, int counter, int k) {
+	if (tr) {
+		if (counter == k) {
+			cout << tr->inf << " ";
+		}
+		preorder_task_4(tr -> left, counter + 1, k);
+		preorder_task_4(tr->right, counter + 1, k);
+	}
+}
+
+
+void task_4() {
+	setlocale(LC_ALL, "RUS");
+	tree* tr = NULL;
+	input_balance_tree(tr);
+	cout << "Исходное дерево:" << endl;
+	
+	preorder(tr);
+	cout << endl;
+	
+	int k, counter = 0;
+	cout << "k = ";
+	cin >> k;
+	cout << "Ответ(Вывести узлы, находящихся на k-ом уровне):" << endl;
+	preorder_task_4(tr, counter, k);
+	cout << endl;
+}
+
+/*
+15
+
+4 5 3 7 6 8 6 7 9 1 2 3 0 6 2
+
+3
+*/
+
+
+int main() {
+	task_4();
 }
