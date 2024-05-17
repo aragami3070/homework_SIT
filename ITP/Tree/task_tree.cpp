@@ -64,3 +64,19 @@ void insert(tree*& tr, int value) {
 	}
 }
 
+
+
+tree* find(tree* tr, int value) {//поиск
+	//если нашли или дошли до конца ветки
+	if (tr->inf == value || !tr) {
+		return tr;
+	}
+	//если элемент больше, то идем по правой ветке
+	if (tr->inf < value) {
+		return find(tr->right, value);
+	}
+	//иначе идем по левой ветке
+	else {
+		return find(tr->left, value);
+	}
+}
