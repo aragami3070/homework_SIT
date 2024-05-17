@@ -238,6 +238,68 @@ test
 5 3 7 1 9 4 2 8 6 0
 */
 
+
+tree* find_task_2(tree* tr, int value) {//поиск
+	cout << tr->inf << " ";
+	//если нашли или дошли до конца ветки
+	if (tr->inf == value || !tr) {
+		return tr;
+	}
+	//если элемент больше, то идем по правой ветке
+	if (tr->inf < value) {
+		return find_task_2(tr->right, value);
+	}
+	//иначе идем по левой ветке
+	else {
+		return find_task_2(tr->left, value);
+	}
+}
+
+
+/*
+task_2
+Вывести путь от корня до узла X.
+*/
+
+void task_2() {
+	setlocale(LC_ALL, "RUS");	
+	tree* tr = NULL;
+	input_bin_tree(tr);
+	cout << "Исходное дерево:" << endl;
+	inorder(tr);
+	cout << endl;
+	preorder(tr);
+	cout << endl;
+	int value; 
+	cout << "x = ";
+	cin >> value;
+	cout << "Ответ(путь от корня до узла X):" << endl;
+	find_task_2(tr, value);
+}
+
+
+/*
+test
+10
+
+0 1 2 3 4 5 6 7 8 9
+
+7
+
+10
+
+5 3 7 1 9 4 2 8 6 0
+
+8
+
+10
+
+5 3 7 1 9 4 2 8 6 0
+
+1
+*/
+
+
 int main(){
-	task_1();
+	task_2();
 }
