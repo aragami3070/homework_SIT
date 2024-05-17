@@ -21,7 +21,6 @@ tree* node(int value) {
 }
 
 
-
 void insert(tree*& tr, int value) {
 	tree* new_node = node(value);
 	if (!tr) {//если дерево пустое
@@ -65,7 +64,6 @@ void insert(tree*& tr, int value) {
 }
 
 
-
 tree* find(tree* tr, int value) {//поиск
 	//если нашли или дошли до конца ветки
 	if (tr->inf == value || !tr) {
@@ -78,5 +76,31 @@ tree* find(tree* tr, int value) {//поиск
 	//иначе идем по левой ветке
 	else {
 		return find(tr->left, value);
+	}
+}
+
+
+tree* Min(tree* tr) {//поиск минимального
+	//чтобы получить минимальный элемент идем по левой ветке до конца
+	//если последний элемент в ветке
+	if (!tr->left) {
+		return tr;
+	}
+	//иначе идем по ветке дальше 
+	else {
+		return Min(tr->left);
+	}
+}
+
+
+tree* Max(tree* tr) {//поиск максимального
+	//чтобы получить максимальный элемент идем по правой ветке до конца
+	//если последний элемент в ветке
+	if (!tr->right) {
+		return tr;
+	}
+	//иначе идем по ветке дальше
+	else {
+		return Max(tr->right);
 	}
 }
