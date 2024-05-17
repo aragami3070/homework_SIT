@@ -190,3 +190,54 @@ void input_bin_tree(tree*& tr) {
 		insert(tr, value);//добавляем элемент в дерево
 	}
 }
+
+
+
+void inorder_task_1(tree* tr, int& counter) {
+	//проводим симитричный обход
+	if (tr) {
+		inorder_task_1(tr->left, counter);
+		//если у узла нет левого ребенка и есть правый
+		if (tr->left == NULL && tr->right) {
+			//то увеличиваем счетчик
+			counter++;
+		}
+		inorder_task_1(tr->right, counter);
+	}
+}
+
+
+/*
+task_1
+Определить количество узлов, имеющих только правого потомка.
+*/
+
+void task_1() {
+	setlocale(LC_ALL, "RUS");
+	int counter = 0;
+	tree* tr = NULL;
+	input_bin_tree(tr);
+	cout << "Исходное дерево:" << endl;
+	inorder(tr);
+	cout << endl;
+	preorder(tr);
+	cout << endl;
+	cout << "Ответ(количество узлов, имеющих только правого потомка):" << endl;
+	inorder_task_1(tr, counter);
+	cout << counter << endl;
+}
+
+/*
+test
+10
+
+0 1 2 3 4 5 6 7 8 9
+
+10
+
+5 3 7 1 9 4 2 8 6 0
+*/
+
+int main(){
+	task_1();
+}
