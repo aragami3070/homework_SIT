@@ -146,3 +146,33 @@ tree* Prev(tree* tr, int value) {//поиск предыдущего
 	}
 	return par_elem;
 }
+
+
+
+//симетричный обход
+void inorder(tree* tr) {
+	if (tr) {
+		inorder(tr->left);
+		cout << tr->inf << " ";
+		inorder(tr->right);
+	}
+}
+
+
+//прямой обход
+void preorder(tree* tr) {
+	if (tr) {
+		cout << tr->inf << " ";
+		preorder(tr->left);
+		preorder(tr->right);
+	}
+}
+
+//обратный обход
+void postorder(tree* tr) {
+	if (tr) {
+		preorder(tr->left);
+		preorder(tr->right);
+		cout << tr->inf << " ";
+	}
+}
