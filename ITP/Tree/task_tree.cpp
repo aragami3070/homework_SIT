@@ -149,6 +149,18 @@ tree* Prev(tree* tr, int value) {//поиск предыдущего
 }
 
 
+void create_tree(tree*& tr, int len) {
+	int value;
+	if (len > 0) {
+		cin >> value;
+		tr = node(value);
+		int len_left = len / 2;
+		int len_right = len - len_left - 1;
+		create_tree(tr->left, len_left);
+		create_tree(tr->right, len_right);
+	}
+}
+
 //симетричный обход
 void inorder(tree* tr) {
 	if (tr) {
@@ -191,6 +203,15 @@ void input_bin_tree(tree*& tr) {
 	}
 }
 
+
+//заполнение идеально сбалансированного дерева
+void input_balance_tree(tree*& tr) {
+	int len;
+	cout << "Введите кол-во элементов дерева:";
+	cin >> len;
+	cout << "Введите элементы дерева:" << endl;
+	create_tree(tr, len);
+}
 
 
 void inorder_task_1(tree* tr, int& counter) {
