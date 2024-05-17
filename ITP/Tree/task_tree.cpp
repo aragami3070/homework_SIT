@@ -321,6 +321,47 @@ test
 */
 
 
+
+
+void preorder_task_3(tree* tr) {
+	//прямой обход 
+	if (tr) {
+		//если у узла нет детей, то это лист и выводим лист
+		if (!tr->left && !tr->right) {
+			cout << tr->inf << " ";
+		}
+		preorder_task_3(tr->left);
+		preorder_task_3(tr->right);
+	}
+}
+
+
+/*
+task_3
+Вывести все листья.
+*/
+void task_3() {
+	setlocale(LC_ALL, "RUS");
+	tree* tr = NULL;
+	input_balance_tree(tr);
+	cout << "Исходное дерево:" << endl;
+	preorder(tr);
+	cout << endl;
+	cout << "Ответ(Вывести все листья):" << endl;
+	preorder_task_3(tr);
+}
+
+
+/*
+10
+
+4 5 3 7 8 6 9 1 2 0
+
+15
+
+4 5 3 7 6 8 6 7 9 1 2 3 0 6 2
+*/
+
 int main(){
-	task_2();
+	task_3();
 }
