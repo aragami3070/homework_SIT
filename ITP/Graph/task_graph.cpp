@@ -142,6 +142,26 @@ void task_2() {
 }
 
 
+/*
+Дан неориентированный граф. 
+Подсчитать степень каждой вершины.
+*/
+
+void task_3() {
+	//создаем граф
+	map<int, list<pair<int, double>>> graph;
+	//не ориетированный граф
+	bool orient = false;
+	//заполняем граф
+	input_graph(graph, orient);
+	cout << "Ответ(вершина : степень):" << endl;
+	for (auto it = graph.begin(); it != graph.end(); it++) {
+		cout << it->first << ":" << it->second.size() << endl;
+	}
+	output_graph(graph);
+}
+
+
 int main(){
-	task_2();
+	task_3();
 }
