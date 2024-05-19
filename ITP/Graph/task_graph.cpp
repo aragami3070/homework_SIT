@@ -261,8 +261,58 @@ void b_f_s(map<int, list<pair<int, double>>>& graph, map<int, int>& visited_node
 }
 
 
+/*
+Дан ориентированный граф
+Вывести все истоки графа.
+*/
+void task_5() {
+	//создаем граф
+	map<int, list<pair<int, double>>> graph;
+	//ориетированный граф
+	bool orient = true;
+	//заполняем граф
+	input_graph(graph, orient);
+	
+	bool flag;
+	//проходимся по всем вершинам
+	cout << "Ответ:" << endl;
+	for (auto it = graph.begin(); it != graph.end(); it++) {
+		flag = true;
+		map<int, int> used; 
+		//делаем обход в ширину
+		b_f_s(graph, used, it->first);
+		//проходимся по всем вершинам другим указателем
+		//если все вершины посещены из вершины it->first, 
+		//то эта вершина является стоком
+		for (auto it_n = graph.begin(); it_n != graph.end(); it_n++) {
+			//если вершина не посещена
+			if (!used[it_n->first]) {
+				//меняем flag и прерываем цикл
+				flag = false;
+				break;
+			}
+		}
+		//если flag не поменял свое значение
+		//значит вершина является истоком 
+		if (flag){
+			cout << it->first << endl;
+		}
+	}
+	output_graph(graph);
+}
+/*
+1 2 1
+2 1 1
+1 4 1
+1 5 1
+2 6 1
+2 7 1
+6 7 1
+7 6 1
+*/
+
 
 int main(){
 	setlocale(LC_ALL, "RUS");
-	task_4();
+	task_5();
 }
