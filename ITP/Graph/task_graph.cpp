@@ -4,6 +4,7 @@
 #include <list>
 #include <vector>
 
+
 using namespace std;
 
 
@@ -48,4 +49,26 @@ void add_edge(map<int, list<pair<int, double>>>& graph, int node1, int node2, do
 			graph[node2].push_back(make_pair(node1, weight));
 		}
 	}
+}
+
+
+void input_graph(map<int, list<pair<int, double>>>& graph, bool orient = false) {
+	//создаем буфферные переменные для создания ребер
+	int node1, node2;
+	double weight;
+	//создаем поток на ввод
+	ifstream input;
+	input.open("input.txt");
+	//считывание из файла
+	while (input.peek() != EOF) {
+		input >> node1 >> node2 >> weight;
+		//добавляем ребро в граф
+		if (weight != 0) {
+			add_edge(graph, node1, node2, weight, orient);
+		}
+		else {
+			add_edge(graph, node1, node2, orient);
+		}
+	}
+	input.close();
 }
