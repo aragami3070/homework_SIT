@@ -8,6 +8,39 @@
 using namespace std;
 
 
+struct queue {
+	int inf;
+	queue* next;
+};
+
+
+void push_back(queue*& head, queue*& tail, int value) {
+	queue* new_cell = new queue;// создаем новый элемент
+	new_cell->inf = value;//добавляем значение в поле нового элемента
+	new_cell->next = NULL;//новый элемент всегда последний
+	if (!head && !tail) {//если очередь пуста, то 
+		//новый элемент и голова и хвост
+		head = tail = new_cell;
+	}
+	else {
+		tail->next = new_cell;//новый элемент следующий для хвоста
+		tail = new_cell;//теперь новый элемент это хвост
+	}
+}
+
+
+int pop(queue*& head, queue*& tail) {
+	int value;//переменная для вывода значения головы
+	value = head->inf;//присваиваем значение головы
+	queue* delete_cell;//создаем доп указатель 
+	delete_cell = head;//ставим этот указатель на голову
+	head = head->next;//голову переносим на следующий элемент
+	if (!head) {//если удаляем последний элемент из очереди
+		tail = NULL;
+	}
+	delete delete_cell;//удаляем первый элемент
+	return value;//возвращаем значение удаленного элемента
+}
 
 void add_edge(map<int, list<pair<int, double>>>& graph, int node1, int node2, double weight = 1.0, bool orient = false) {
 	//ищем вершину node1
@@ -162,7 +195,6 @@ void task_3() {
 }
 
 
-
 void d_f_s(map<int, list<pair<int, double>>>& graph, map<int, int>& visited_node, int first_node) {
 	//помечаем вершину как посещенную
 	visited_node[first_node] = 1;
@@ -210,7 +242,7 @@ void task_4() {
 	}
 }
 
-
 int main(){
+	setlocale(LC_ALL, "RUS");
 	task_4();
 }
