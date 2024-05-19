@@ -74,7 +74,6 @@ void input_graph(map<int, list<pair<int, double>>>& graph, bool orient = false) 
 }
 
 
-
 void output_graph(map<int, list<pair<int, double>>>& graph) {
 	for (auto it_main_node = graph.begin(); it_main_node != graph.end(); it_main_node++) {
 		//выводим вершину откуда выходят ребра
@@ -85,4 +84,43 @@ void output_graph(map<int, list<pair<int, double>>>& graph) {
 		}
 		cout << endl;
 	}
+}
+
+
+
+/*
+Дан неориентированный граф. 
+Вывести количество вершин, смежных с данной.
+*/
+
+void task_1() {
+	//создаем граф
+	map<int, list<pair<int, double>>> graph;
+	//не ориетированный граф
+	bool orient = false;
+	//заполняем граф
+	input_graph(graph, orient);
+	cout << "Введите вершину:" << endl;
+	int node;
+	cin >> node;
+	auto it = graph.find(node);
+	cout << "Ответ:" << endl;
+	for (auto it_res = it->second.begin(); it_res != it->second.end(); it_res++) {
+		cout << it_res->first << " ";
+	}
+	cout << endl;
+}
+/*
+test (ввод через файл)
+
+1 2 1
+2 3 1
+3 4 1
+4 1 1
+5 6 1
+*/
+
+
+int main(){
+	task_1();
 }
