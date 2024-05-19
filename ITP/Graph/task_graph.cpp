@@ -178,7 +178,39 @@ void d_f_s(map<int, list<pair<int, double>>>& graph, map<int, int>& visited_node
 	}
 }
 
+/*
+Дан неориентированный граф. 
+Выяснить, является ли граф связным.
+*/
+
+void task_4() {
+	//создаем граф
+	map<int, list<pair<int, double>>> graph;
+	//не ориетированный граф
+	bool orient = false;
+	//заполняем граф
+	input_graph(graph, orient);
+	map<int, int> visited_node;
+	//проходимся по всем вершинам смежным с первой и записываем их в visited_node
+	d_f_s(graph, visited_node, graph.begin()->first);
+	//если флаг останется true, то граф связный, иначе несвязный
+	bool flag = true;
+	for (auto it = graph.begin(); it != graph.end(); it++) {
+		//если вершина не нашлась в словаре, значит граф несвязный
+		if (!visited_node.count(it->first)) {
+			flag = false;
+			break;
+		}
+	}
+	if (flag) {
+		cout << "Граф связный" << endl;
+	}
+	else {
+		cout << "Граф несвязный" << endl;
+	}
+}
+
 
 int main(){
-	task_3();
+	task_4();
 }
