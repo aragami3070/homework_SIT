@@ -242,6 +242,26 @@ void task_4() {
 	}
 }
 
+
+void b_f_s(map<int, list<pair<int, double>>>& graph, map<int, int>& visited_node, int first_node) {
+	visited_node[first_node] = 1;
+	queue* head = NULL;
+	queue* tail = NULL;
+	push_back(head, tail, first_node);
+	while (head) {
+		int node = pop(head, tail);
+		auto it = graph.find(node);
+		for (auto it_n = it->second.begin(); it_n != it->second.end(); it_n++) {
+			if (!visited_node[it_n->first]) {
+				visited_node[it_n->first] = 1;
+				push_back(head, tail, it_n->first);
+			}
+		}
+	}
+}
+
+
+
 int main(){
 	setlocale(LC_ALL, "RUS");
 	task_4();
