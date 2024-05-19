@@ -121,6 +121,27 @@ test (ввод через файл)
 */
 
 
+/*
+Дан неориентированный граф. 
+Вставить в граф ребро, соединяющее вершины A и B.
+*/
+
+void task_2() {
+	//создаем граф
+	map<int, list<pair<int, double>>> graph;
+	//не ориетированный граф
+	bool orient = false;
+	//заполняем граф
+	input_graph(graph, orient);
+	cout << "Введите вершины:" << endl;
+	int node1, node2;
+	cin >> node1 >> node2;
+	add_edge(graph, node1, node2, 1.0, orient);
+	cout << "Ответ:" << endl;
+	output_graph(graph);
+}
+
+
 int main(){
-	task_1();
+	task_2();
 }
