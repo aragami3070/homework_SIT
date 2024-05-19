@@ -72,3 +72,17 @@ void input_graph(map<int, list<pair<int, double>>>& graph, bool orient = false) 
 	}
 	input.close();
 }
+
+
+
+void output_graph(map<int, list<pair<int, double>>>& graph) {
+	for (auto it_main_node = graph.begin(); it_main_node != graph.end(); it_main_node++) {
+		//выводим вершину откуда выходят ребра
+		cout << it_main_node->first << ": " << endl;
+		//выводим список смежных вершин
+		for (auto it_node = it_main_node->second.begin(); it_node != it_main_node->second.end(); it_node++) {
+			cout << "{" << it_node->first << ", " << it_node->second << "}; ";
+		}
+		cout << endl;
+	}
+}
