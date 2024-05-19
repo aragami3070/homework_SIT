@@ -162,6 +162,23 @@ void task_3() {
 }
 
 
+
+void d_f_s(map<int, list<pair<int, double>>>& graph, map<int, int>& visited_node, int first_node) {
+	//помечаем вершину как посещенную
+	visited_node[first_node] = 1;
+	//создаем указательна эту вершину
+	auto it = graph.find(first_node);
+	//проходимся по всем смежным вершинам
+	for (auto it_n = it->second.begin(); it_n != it->second.end(); it_n++) {
+		//если it_n вершина еще не была посещена
+		if (!visited_node.count(it_n->first)) {
+			//то вызываем этот обход от вершины it_n
+			d_f_s(graph, visited_node, it_n->first);
+		}
+	}
+}
+
+
 int main(){
 	task_3();
 }
