@@ -312,7 +312,27 @@ void task_5() {
 */
 
 
-int main(){
+
+int main() {
 	setlocale(LC_ALL, "RUS");
-	task_5();
+	cout << "Введите номер задания:" << endl;
+	int choose;
+	cin >> choose;
+	switch(choose){
+	case 1:
+		task_1();
+		break;
+	case 2: 
+		task_2();
+		break;
+	case 3:
+		task_3();
+		break;
+	case 4:
+		task_4();
+		break;
+	case 5:
+		task_5();
+		break;
+	}
 }
