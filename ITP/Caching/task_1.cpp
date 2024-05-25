@@ -73,3 +73,53 @@ void insert_after(list*& head, list*& tail, list* after_this, people_info value)
 		after_this->next = temp;
 	}
 }
+
+
+void del_elem(list*& head, list*& tail, list* del_this) {
+	//если один элемент в списке то 
+	if (head == tail) {
+		//head и tail обнуляем
+		head = tail = NULL;
+	}
+	//если удаляем голову  
+	else if (head == del_this) {
+		//то сдвигаем указатель на голову на следующий элемент
+		head = head->next;
+		//обнуляем указатель на предыдущий
+		head->prev = NULL;
+	}
+	//если удаляем хвост
+	else if (tail == del_this) {
+		//то сдвигаем указатель на хвост на предыдущий элемент
+		tail = tail->prev;
+		//обнуляем указатель на следующий элемент
+		tail->next = NULL;
+	}
+	//удаляем из середины
+	else {
+		//у элемента после удаляемого предыдущий = элементу перед удалемым
+		(del_this->next)->prev = del_this->prev;
+		//у элемента перед удаляемым следующий = элементу после удалемого
+		(del_this->prev)->next = del_this->next;
+	}
+
+	delete del_this;
+}
+
+
+void del_list(list*& head, list*& tail) {
+	//пока не дошли до конца
+	while (head) {
+		list* temp = head;//создали доп указатель на голову
+		if (head != tail) {
+			head = head->next;//двигаем голову на следующий элемент
+			head->prev = NULL;//обнуляем указатель на предыдущий элемент
+			delete temp;//удаляем элемент
+		}
+		else {
+			head = tail = NULL;
+			break;
+		}
+	}
+}
+
