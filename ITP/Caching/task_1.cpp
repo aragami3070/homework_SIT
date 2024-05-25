@@ -184,3 +184,55 @@ void output_f(ofstream& output, list* temp) {//вывод в файл
 	//выводим зарплату
 	output << left << temp->inf.salary << endl;
 }
+
+
+
+int cache_function(int salary, int size){
+	return salary % size;
+}
+
+void create_cache_table(ifstream& input, vector<pair<list*,list*>>& cache_table, int size){
+	while (input.peek() != EOF){
+		//создаем буферную структуру для входных данных человека
+		people_info temp;
+		//считываем данные одного человека 
+		temp = input_f(input);
+		//определяем значение хеш функции
+		int number = cache_function(temp.salary, size);
+		//добавляем данные по человеку в список хеш таблицы под номером number
+		push_back(cache_table[number].first, cache_table[number].second, temp);
+	}
+}
+
+
+
+void open_cache(){
+	setlocale(LC_ALL,"RUS");
+	//создаем потоки на ввод и ввывод
+	ifstream input;
+	ofstream output;
+	int size = 28;
+	input.open("input.txt");
+	output.open("output_1.txt");
+	//создаем и заполняем хэш таблицу
+	vector<pair<list*,list* >> cache_table(size);
+	create_cache_table(input, cache_table, size);
+
+	//вывод таблицы
+	for (int i = 0; i < size; i++){
+		output << i << ":" << endl;
+		list* temp = cache_table[i].first;
+		while (temp){
+			output_f(output, temp);
+			temp = temp->next;
+		}
+	}
+	//закрываем поток
+	input.close();
+	output.close();
+}
+
+
+int main(){
+	open_cache();
+}
