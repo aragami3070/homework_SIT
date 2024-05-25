@@ -89,3 +89,60 @@ void output_f(ofstream& output, people_info temp) {//вывод в файл
 	output << left << temp.salary << endl;
 }
 
+
+int cache_function(int year, int size){
+	double coefficient = 0.61803;
+    int c = (year * coefficient);
+    double d = (year * coefficient);
+    int res = size * (d - c);
+	return res;
+}
+
+void create_cache_table(ifstream& input, vector<people_info>& cache_table, int size){
+	while (input.peek() != EOF){
+		//создаем буферную структуру для входных данных человека
+		people_info temp;
+		//считываем данные одного человека 
+		temp = input_f(input);
+		//определяем значение хеш функции
+		int number = cache_function(temp.date.year, size);
+		//добавляем данные по человеку в свободную ячейку хеш таблицы под номером number
+		for (int i = 0; i < size; i++){
+			int n = cache_function(number + i, size);
+			if (cache_table[n].surname == " "){
+				cache_table[n] = temp;
+				break;
+			}
+		}
+	}
+}
+
+
+
+void close_cache(){
+	setlocale(LC_ALL,"RUS");
+	//создаем потоки на ввод и ввывод
+	ifstream input;
+	ofstream output;
+	int size = 28;
+	input.open("input.txt");
+	output.open("output_2.txt");
+	//создаем и заполняем хэш таблицу
+	vector<people_info> cache_table(size);
+	create_cache_table(input, cache_table, size);
+
+	//вывод таблицы
+	for (int i = 0; i < size; i++){
+		output << i << ":" << endl;
+		people_info temp = cache_table[i];
+		output_f(output, temp);
+	}
+	//закрываем поток
+	input.close();
+	output.close();
+}
+
+
+int main(){
+	close_cache();
+}
