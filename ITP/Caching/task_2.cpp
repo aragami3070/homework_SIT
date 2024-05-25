@@ -28,3 +28,35 @@ struct people_info {//структура для всех данных считы
 	double work_experience = 0.0;//опыт работы
 	int salary = 0;//зарплата
 };
+
+
+//ввод из файла
+people_info input_f(ifstream& input){
+	people_info temp;
+	string str;
+
+	input >> temp.surname;//ввод фамилии
+	input >> temp.post;//ввод должности
+	input >> str;//вводится дата рождения строкой
+	temp.date = str_to_date(str);//преобразование строки с датой в структуру даты
+	input >> temp.work_experience;//ввод стажа
+	input >> temp.salary;//ввод зарплаты
+
+	return temp;
+}
+
+//ввод из терминала
+people_info input_t(){
+	people_info temp;
+	string str;
+
+	cin >> temp.surname;//ввод фамилии
+	cin >> temp.post;//ввод должности
+	cin >> str;//вводится дата рождения строкой
+	temp.date = str_to_date(str);//преобразование строки с датой в структуру даты
+	cin >> temp.work_experience;//ввод стажа
+	cin >> temp.salary;//ввод зарплаты
+
+	return temp;
+}
+
