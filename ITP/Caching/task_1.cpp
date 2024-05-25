@@ -186,10 +186,10 @@ void output_f(ofstream& output, list* temp) {//вывод в файл
 }
 
 
-
 int cache_function(int salary, int size){
 	return salary % size;
 }
+
 
 void create_cache_table(ifstream& input, vector<pair<list*,list*>>& cache_table, int size){
 	while (input.peek() != EOF){
@@ -204,6 +204,26 @@ void create_cache_table(ifstream& input, vector<pair<list*,list*>>& cache_table,
 	}
 }
 
+
+list* find_open_cache(vector<pair<list*, list*>> cache_table, people_info man, int size){
+	//определяем значение хеш функции
+	int number = cache_function(man.salary, size);
+	//проходимся по списку хеш таблицы соответствующему значению хеш функции 
+	for (auto it = cache_table[number].first; it != cache_table[number].second; it->next){
+		//ищем нужного человека
+		if ((it->inf).surname == man.surname){
+			if((it->inf).post == man.post &&
+				(it->inf).date.year == man.date.year &&
+				(it->inf).work_experience == man.work_experience &&
+				(it->inf).salary == man.salary){
+				//возвращаем указатель на человека если нашли
+				return it;
+			}
+		}
+	}
+	//если не нашли возвращаем NULL
+	return NULL;
+}
 
 
 void open_cache(){
@@ -230,6 +250,15 @@ void open_cache(){
 	//закрываем поток
 	input.close();
 	output.close();
+
+	//вводим данные человека, которого ходтим найти
+	cout << "Введите данные человека, которого хотите найти:" << endl;
+	people_info man;
+	man = input_t();
+	//поиск 
+	list* man_f = find_open_cache(cache_table, man, size);
+	//вывод указателя
+	cout << man_f << endl;
 }
 
 
