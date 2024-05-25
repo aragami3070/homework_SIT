@@ -118,6 +118,26 @@ void create_cache_table(ifstream& input, vector<people_info>& cache_table, int s
 }
 
 
+people_info* find_close_cache(vector<people_info> cache_table, people_info man, int size){
+	//определяем значение хеш функции
+	int number = cache_function(man.date.year, size);
+	for (int i = 0; i < size; i++){
+		int n = cache_function(number + i, size);
+		if (cache_table[n].surname == man.surname){
+			if(cache_table[n].post == man.post &&
+				cache_table[n].date.year == man.date.year &&
+				cache_table[n].work_experience == man.work_experience &&
+				cache_table[n].salary == man.salary){
+				//возвращаем указатель на человека если нашли
+				people_info* res = &cache_table[n];
+				return res;
+			}
+			
+		}
+	}
+	return NULL;
+}
+
 
 void close_cache(){
 	setlocale(LC_ALL,"RUS");
@@ -140,6 +160,15 @@ void close_cache(){
 	//закрываем поток
 	input.close();
 	output.close();
+
+	//вводим данные человека, которого ходтим найти
+	cout << "Введите данные человека, которого хотите найти:" << endl;
+	people_info man;
+	man = input_t();
+	//поиск 
+	people_info* man_f = find_close_cache(cache_table, man, size);
+	//вывод указателя
+	cout << man_f << endl;
 }
 
 
