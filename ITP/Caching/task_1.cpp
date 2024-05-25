@@ -123,3 +123,18 @@ void del_list(list*& head, list*& tail) {
 	}
 }
 
+
+//ввод из файла
+people_info input_f(ifstream& input){
+	people_info temp;
+	string str;
+
+	input >> temp.surname;//ввод фамилии
+	input >> temp.post;//ввод должности
+	input >> str;//вводится дата рождения строкой
+	temp.date = str_to_date(str);//преобразование строки с датой в структуру даты
+	input >> temp.work_experience;//ввод стажа
+	input >> temp.salary;//ввод зарплаты
+
+	return temp;
+}
