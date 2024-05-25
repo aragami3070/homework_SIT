@@ -138,3 +138,20 @@ people_info input_f(ifstream& input){
 
 	return temp;
 }
+
+
+
+//ввод из терминала
+people_info input_t(){
+	people_info temp;
+	string str;
+
+	cin >> temp.surname;//ввод фамилии
+	cin >> temp.post;//ввод должности
+	cin >> str;//вводится дата рождения строкой
+	temp.date = str_to_date(str);//преобразование строки с датой в структуру даты
+	cin >> temp.work_experience;//ввод стажа
+	cin >> temp.salary;//ввод зарплаты
+
+	return temp;
+}
