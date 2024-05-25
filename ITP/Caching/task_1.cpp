@@ -140,7 +140,6 @@ people_info input_f(ifstream& input){
 }
 
 
-
 //ввод из терминала
 people_info input_t(){
 	people_info temp;
@@ -154,4 +153,34 @@ people_info input_t(){
 	cin >> temp.salary;//ввод зарплаты
 
 	return temp;
+}
+
+
+//вывод в файл
+void output_f(ofstream& output, list* temp) {//вывод в файл
+	//по левому краю 13 позиций на фамилию 
+	//(чтобы у всех фамилий было одинаковое кол-во занимаемого места)
+	output << setw(13) << left << temp->inf.surname;
+	//выводим должность
+	output << setw(15) << left << temp->inf.post;
+	//выводим дату рождения
+	//если дней меньше 10 то добавляем 0 перед цифрой 
+	//и так же для месяца
+	if (temp->inf.date.day < 10) {
+		output << left << '0' << temp->inf.date.day << '.';
+	}
+	else {
+		output << left << temp->inf.date.day << '.';
+	}
+	if (temp->inf.date.month < 10) {
+		output << left << '0' << temp->inf.date.month << '.';
+	}
+	else {
+		output << left << temp->inf.date.month << '.';
+	}
+	output << left << temp->inf.date.year << ' ';
+	//выводим стаж
+	output << setw(2) << left << temp->inf.work_experience << ' ';
+	//выводим зарплату
+	output << left << temp->inf.salary << endl;
 }
