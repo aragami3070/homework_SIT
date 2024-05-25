@@ -20,3 +20,11 @@ date_of_birth str_to_date(string str) {
 		(str[8] - '0') * 10 + str[9] - '0';
 	return date;
 }
+
+
+struct people_info {//структура для всех данных считываемых из файла
+	string surname = " ", post = " ";//фамилия, должность
+	date_of_birth date;//дата рождения
+	double work_experience = 0.0;//опыт работы
+	int salary = 0;//зарплата
+};
