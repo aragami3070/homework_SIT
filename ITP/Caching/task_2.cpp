@@ -60,3 +60,32 @@ people_info input_t(){
 	return temp;
 }
 
+//вывод в файл
+void output_f(ofstream& output, people_info temp) {//вывод в файл
+	//по левому краю 13 позиций на фамилию 
+	//(чтобы у всех фамилий было одинаковое кол-во занимаемого места)
+	output << setw(13) << left << temp.surname;
+	//выводим должность
+	output << setw(15) << left << temp.post;
+	//выводим дату рождения
+	//если дней меньше 10 то добавляем 0 перед цифрой 
+	//и так же для месяца
+	if (temp.date.day < 10) {
+		output << left << '0' << temp.date.day << '.';
+	}
+	else {
+		output << left << temp.date.day << '.';
+	}
+	if (temp.date.month < 10) {
+		output << left << '0' << temp.date.month << '.';
+	}
+	else {
+		output << left << temp.date.month << '.';
+	}
+	output << left << temp.date.year << ' ';
+	//выводим стаж
+	output << setw(2) << left << temp.work_experience << ' ';
+	//выводим зарплату
+	output << left << temp.salary << endl;
+}
+
