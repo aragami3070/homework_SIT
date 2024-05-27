@@ -209,7 +209,7 @@ list* find_open_cache(vector<pair<list*, list*>> cache_table, people_info man, i
 	//определяем значение хеш функции
 	int number = cache_function(man.salary, size);
 	//проходимся по списку хеш таблицы соответствующему значению хеш функции 
-	for (auto it = cache_table[number].first; it != cache_table[number].second; it->next){
+	for (auto it = cache_table[number].first; it; it = it->next){
 		//ищем нужного человека
 		if ((it->inf).surname == man.surname){
 			if((it->inf).post == man.post &&
