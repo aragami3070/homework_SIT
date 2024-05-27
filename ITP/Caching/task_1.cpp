@@ -226,6 +226,25 @@ list* find_open_cache(vector<pair<list*, list*>> cache_table, people_info man, i
 }
 
 
+void del_person_info(vector<pair<list*,list*>>& cache_table, people_info person, int size){
+	//определяем значение хеш функции
+	int number = cache_function(person.salary, size);
+	//проходимся по списку хеш таблицы соответствующему значению хеш функции 
+	for (auto it = cache_table[number].first; it; it = it->next){
+		//ищем нужного человека
+		if ((it->inf).surname == person.surname){
+			if((it->inf).post == person.post &&
+				(it->inf).date.year == person.date.year &&
+				(it->inf).work_experience == person.work_experience &&
+				(it->inf).salary == person.salary){
+				//если нашли удаляем
+				del_elem(cache_table[number].first, cache_table[number].second, it);
+				break;
+			}
+		}
+	}
+}
+
 void open_cache(){
 	setlocale(LC_ALL,"RUS");
 	//создаем потоки на ввод и ввывод
@@ -259,6 +278,20 @@ void open_cache(){
 	list* man_f = find_open_cache(cache_table, man, size);
 	//вывод указателя
 	cout << man_f << endl;
+
+	output.open("output_1_del_res.txt");
+	//удаляем данные о человеке
+	del_person_info(cache_table, man, size);
+	//вывод таблицы в другой файл
+	for (int i = 0; i < size; i++){
+		output << i << ":" << endl;
+		list* temp = cache_table[i].first;
+		while (temp){
+			output_f(output, temp);
+			temp = temp->next;
+		}
+	}
+	output.close();
 }
 
 
